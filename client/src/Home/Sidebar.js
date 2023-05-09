@@ -20,7 +20,7 @@ export default function Sidebar(){
     return(
     <div className="sidebar">
       <header className="sidebar-header">
-        <img className="logo-img" src={logo} />
+        <img src={logo} />
       </header>
       <nav>
         <button>
