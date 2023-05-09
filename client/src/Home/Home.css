@@ -1,0 +1,73 @@
+* {
+	margin: 0;
+	padding: 0;
+  text-align: center;
+	box-sizing: border-box;
+}
+
+.imgBox{
+    width: 600;
+    height: 880;
+}
+
+.imgBox img{
+    width: 100%;
+    height: 100%;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+  }
+
+  .cropSelection{
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    width: 110px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+  }
+
+  .overlay:hover{
+    background-color: rgba(190, 190, 190, 0.5);
+  }
+  .statuspostcontainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .postimage{
+    width: 400px;
+    background-color: blue;
+    height: 390px;
+  }
+  .statusbox{
+    width: 400px;
+    background-color: rgb(146, 146, 230);
+    height: 390px;
+  }
+
+  .mySwiper{
+    height: 100%;
+    width: 100%;
+  }
