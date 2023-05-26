@@ -1,10 +1,15 @@
 import React from 'react';
 //import Home from './Home/Home';
-import Sidebar from './Home/Sidebar';
+import Instagram from './Home/Instagram';
+import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
 
 function App() {
   return (
-    <Sidebar/>
+    <Router>
+    <Routes>
+     <Route exact path='/' element={<Instagram/>}></Route>
+   </Routes>
+ </Router>
   );
 }
 

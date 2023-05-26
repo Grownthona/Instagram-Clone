@@ -7,8 +7,8 @@ import SendIcon from '@mui/icons-material/Send';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import './sidebar.css'
 import Home from "./Home";
+import './sidebar.css'
 
 export default function Sidebar(){
   const [open,setOpen] = useState(false);

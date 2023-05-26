@@ -7,9 +7,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
-import "swiper/css";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import "swiper/css/navigation";
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CropFreeIcon from '@mui/icons-material/CropFree';
@@ -17,6 +15,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import './Home.css';
 import "swiper/css";
 import "swiper/css/navigation";
+import axios from "axios";
 import { Navigation } from "swiper";
 
 export default function Home() {
@@ -29,6 +28,9 @@ export default function Home() {
     const [statusOn,setStatus] = useState(false);
     const [numFiles, setNumFiles] = useState(0);
     const [images, setImages] = useState([]);
+    const [selectedImages, setSelectedImages] = useState([]);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -49,6 +51,27 @@ export default function Home() {
       setOpen(true);
     }
 
+    const tittle = (e) => {
+      setTitle(e.target.value);
+    }
+  
+    const contentset = (e) => {
+      setContent(e.target.value);
+    }
+
+    const Uploadpost = () => {
+      const formData = new FormData();
+      formData.append('caption', title);
+      formData.append('content', content);
+  
+      selectedImages.forEach((image) => {
+        formData.append("images", image);
+      });
+      axios
+        .post("http://localhost:5000/api/add", formData)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
     const StatusOpen = () => {
       setStatus(true);
       setOpen(false);
@@ -137,7 +160,8 @@ export default function Home() {
          return selectedFIles.push(URL.createObjectURL(file))
       })
       setImages(selectedFIles);
-}
+      setSelectedImages(Array.from(e.target.files));
+    }
     return (
       <div>
       
@@ -146,7 +170,7 @@ export default function Home() {
             <div style={{display: 'flex',justifyContent: 'space-between',alignItems:'centre',fontSize: '14',overflow:'hidden',fontWeight: '550',padding:'8px 16px',borderBottom:'1px solid #e8e7e3'}}>
               <div class="left" onClick={GoBack}><ArrowBackIcon></ArrowBackIcon></div>
                 <div class="center">write caption</div>
-                <div class="right" onClick={StatusOpen} style={{color:'blue'}}>Share</div>
+                <div class="right" onClick={Uploadpost} style={{color:'blue'}}>Share</div>
             </div>
             <div style={{position:'relative',width:'800px',height:'390px',overflow:'hidden'}}>
               <div className='statuspostcontainer'>
@@ -160,6 +184,8 @@ export default function Home() {
                       </Swiper>
                 </div>
                 <div className='statusbox'>
+                <input type="text" onChange={tittle} name='caption' placeholder='tittle'/>
+                      <input type="text" onChange={contentset} name='content' placeholder='content'/>
                 </div>
               </div>
             </div>
@@ -206,7 +232,7 @@ export default function Home() {
                       <DialogTitle>Drag photos and videos here</DialogTitle>
                         <BootstrapButton variant="contained" component="label">
                           Select From Computer
-                          <input hidden accept="image/*" multiple type="file" onChange={handleFileChange} />
+                          <input name="images" hidden accept="image/*" multiple type="file" onChange={handleFileChange} />
                        </BootstrapButton>
                   </Box>
                 </Container>
